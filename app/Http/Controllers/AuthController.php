@@ -53,13 +53,16 @@ class AuthController extends Controller
                 'message' => ['Username Or password incorrect']
             ],200);
         }
+            $token = $request->user()->currentAccessToken();
+            $request->user()->currentAccessToken()->delete(); 
         
-        $request->user()->currentAccessToken()->delete();
-        return response()->json([
+            return response()->json([
             'status' => 'success',
             'message' => 'User logged out successfully',
             'name' => $user->name,
             'email' => $user->email,
+            'token' => $token,
         ],200);
+        
     }
 }
