@@ -47,15 +47,18 @@ class AuthController extends Controller
     public function logout (Request $request) 
     {
         $user = User::where('email',$request->email)->first();
+        //Comprueba si la contraseña de este email es correcta
         if (! $user->email || ! Hash::check($request->password,$user->password))
         {
             return response() ->json([
                 'message' => ['Username Or password incorrect']
             ],200);
         }
+            //Guarda el token en otra variable para mostrarla despues
             $token = $request->user()->currentAccessToken();
+            //Borra el token
             $request->user()->currentAccessToken()->delete(); 
-        
+            //Devuelve el json de respuesta
             return response()->json([
             'status' => 'success',
             'message' => 'User logged out successfully',
