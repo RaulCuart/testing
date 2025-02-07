@@ -35,13 +35,19 @@ class AuthController extends Controller
                 'message' => ['Username Or password incorrect']
             ],200);
         }
+    
         $user->tokens()->delete();
+        
+        $createdToken = $user->createToken('auth_token')->plainTextToken;
+        [$id_personal_access_token,$onlyToken] = explode('|',$createdToken,2);
 
         return response()->json([
             'status' => 'success',
             'message' => 'User logged in successfully',
             'name' => $user->name,
-            'token' => $user->createToken('auth_token')->plainTextToken,
+            'token' => $createdToken,
+            '$id_personal_access_token' => $id_personal_access_token,
+            '$onlyToken' => $onlyToken,
         ],200);
     }
     public function logout (Request $request) 
