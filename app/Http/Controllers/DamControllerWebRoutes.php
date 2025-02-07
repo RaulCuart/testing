@@ -4,16 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Dam;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class DamControllerWebRoutes extends Controller
 {
     public function getDamsFromApi()
     {
-        $dam_all = Dam::all();
-        $dam_all = Dam::paginate(1);
+        $response = Http::get('http://api-rauljoel.test/api/dams');
+        $jsonData = $response->json();
         
-        dd($dam_all);
-        return view('dams.index', ['dam_all' => $dam_all]);
+        $status = $jsonData['status'];
+        $message = $jsonData['message'];
+        $data = $jsonData['data'];
+        
+        $datos = [];
+        foreach ($data as $dam) {
+            //$datos[] = $status;
+            //$datos[] = $message;
+            $datos[]  = $dam;
+        }
+
+        //dd($status,$message,$data);
+    
+        dd($datos);
     }
     /**
      * Display a listing of the resource.
