@@ -19,7 +19,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('dams',DamControllerWebRoutes::class);
+
 Route::get('/dams',[DamControllerWebRoutes::class,'getDamsFromApi']);
 
+Route::get('/dams/{id}',[DamControllerWebRoutes::class,'getDamByIdFromApi']);
+Route::get('/damsToDestroy/{id}',[DamControllerWebRoutes::class,'deleteDamByIdFromApi']);
+Route::get('/damsToUpdate/{id}',[DamControllerWebRoutes::class,'updateDamByIdFromApi']);
+Route::resource('dams',DamControllerWebRoutes::class);
 require __DIR__.'/auth.php';

@@ -16,4 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
+    //$exceptions->render(function(\Throwable $e, Request $request))
+    //{
+   //     return response()->json([
+
+   //     ])
+   // }
     })->create();
