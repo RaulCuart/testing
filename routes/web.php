@@ -25,5 +25,8 @@ Route::get('/dams',[DamControllerWebRoutes::class,'getDamsFromApi']);
 Route::get('/dams/{id}',[DamControllerWebRoutes::class,'getDamByIdFromApi']);
 Route::get('/damsToDestroy/{id}',[DamControllerWebRoutes::class,'deleteDamByIdFromApi']);
 Route::get('/damsToUpdate/{id}',[DamControllerWebRoutes::class,'updateDamByIdFromApi']);
+Route::get('/damsToCreate',[DamControllerWebRoutes::class,'createDamWithJsonBodyReqFromAPI']);
+Route::get('/damsToCreateBearer',[DamControllerWebRoutes::class,'createDamWithBearerJsonBodyReqFromAPI']);
+
 Route::resource('dams',DamControllerWebRoutes::class);
 require __DIR__.'/auth.php';

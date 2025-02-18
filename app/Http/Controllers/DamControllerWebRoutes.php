@@ -73,6 +73,39 @@ class DamControllerWebRoutes extends Controller
     {
  
     }
+
+    public function createDamWithJsonBodyReqFromAPI()
+    {
+        $newDam = [
+            'curso' => 'primero',
+            'modulo' => 'programacionn',
+            'descripcion' => 'esto es un test',
+            'nHoras' => 20,
+        ];
+
+        $url = "http://api-rauljoel.test/api/dams";
+        $response = Http::post($url,$newDam);
+        $jsonData = $response->json();
+        dd($jsonData);
+        
+    }
+
+    public function createDamWithBearerJsonBodyReqFromAPI()
+    {
+        $newDam = [
+            'curso' => 'segundo',
+            'modulo' => 'base de datosss',
+            'descripcion' => 'test con bearer',
+            'nHoras' => 50,
+        ];
+        $url ="http://api-rauljoel.test/api/dams";
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer Dy3tLBmaDOUCTpVcWDKJAmeLMwT6NSLHB0Zhm4fj639bb8de' 
+        ])->post($url,$newDam);
+        $jsonData = $response->json();
+        dd($jsonData);
+    }
+
     public function getDamByIdFromApi(string $id)
     {
         $response = Http::get("http://api-rauljoel.test/api/dams/{$id}");
@@ -118,9 +151,16 @@ class DamControllerWebRoutes extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'Message error'=>$e->getMessage(),
-                'code message' => $e->getCode(),
+                'code message' => $e->getCode(),    
             ],200);
         }
+
+        //{
+   //        "curso": "primero",
+   //        "modulo": "programacion",
+   //        "descripcion": "test",
+  //         "nHoras": 20,
+//        }
     }
 
     /**

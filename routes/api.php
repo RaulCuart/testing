@@ -15,8 +15,8 @@ Route::post('/login', [AuthController::class, 'login']);
 //Funcionalidad de DamController
 Route::get('/dams',[DamController::class,'index']);
 Route::get('/dams/{id}',[DamController::class,'show']);
-Route::post('/dams',[DamController::class,'storeBodyReq'])->middleware('auth:sanctum');
-//Route::post('/dams',[DamController::class,'store']);
+Route::post('/dams',[DamController::class,'store'])->middleware('auth:sanctum');
+Route::post('/dams',[DamController::class,'store']);
 Route::put('/dams/{id}',[DamController::class,'update']);
 Route::delete('/dams/{id}',[DamController::class,'destroy']);
 //Funcionalidad de body
